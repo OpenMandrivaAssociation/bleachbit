@@ -1,71 +1,98 @@
-%define name bleachbit
-%define version 0.8.0
-%define release %mkrel 1
-
-Summary: Clean junk to free disk space and to maintain privacy 
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: %{name}-%{version}.tar.bz2
-License: GPLv3
-Group: File tools
-Url:            http://bleachbit.sourceforge.net
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildArch: noarch
-BuildRequires:  libpython-devel
-
-Requires:       gnome-python
-Requires:       gnome-python-gnomevfs
-Requires:       pygtk2.0 >= 2.6
-
+Name:		bleachbit
+Version:	0.9.2
+Release:	%mkrel 1
+Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
+Group:		System/Configuration/Other
+License:	GPLv3
+URL:		http://bleachbit.sourceforge.net/
+Source0:	%{name}-%{version}.tar.xz
+BuildArch:	noarch
+BuildRequires:	python-devel
+BuildRequires:	desktop-file-utils
+Requires:	python
+Requires:	gnome-python
+Requires:	gnome-python-gnomevfs
+Requires:	pygtk2.0 >= 2.6
+Requires:	usermode-consoleonly
 
 %description
-Delete traces of your activities and other junk files to free disk
-space and maintain privacy.  BleachBit identifies and erases
-broken menu entries, cache, cookies, localizations, recent document
-lists, and temporary files in Firefox, OpenOffice.org, Bash, and 50
-other applications.
-
-Shred files to prevent recovery, and wipe free disk space to
-hide previously deleted files.
+BleachBit deletes unnecessary files to free valuable disk space
+and maintain privacy. Rid your system of old junk including cache,
+temporary files, and cookies. Designed for Linux systems, it
+wipes clean Bash, Beagle, Epiphany, Firefox, Adobe Flash, Java,
+KDE, OpenOffice.org, Opera, rpmbuild, XChat and more.
 
 %prep
 %setup -q
 
 %build
-%{__python} setup.py build
+make -C po local
+python setup.py build
 
-cp %{name}.desktop %{name}-root.desktop
-sed -i -e 's/Name=BleachBit$/Name=BleachBit as Administrator/g' %{name}-root.desktop
-sed -i -e 's/Exec=bleachbit/Exec=su\ -c\ \"bleachbit\"/g' %{name}-root.desktop
-
-# remove Windows-specific cleaners
-grep -l os=.windows. cleaners/*xml | xargs rm -f
-# remove Windows-specific modules
-rm -f bleachbit/Windows.py
-
+sed -i -e 's|/usr/bin/env python|/usr/bin/python|g' bleachbit/GUI.py
 
 %install
 rm -rf %{buildroot}
 
 %makeinstall_std prefix=%{_prefix}
-# make install DESTDIR=$RPM_BUILD_ROOT prefix=%{_prefix}
-make -C po install DESTDIR=$RPM_BUILD_ROOT
-install -m 0755 %{name}-root.desktop %{buildroot}%{_datadir}/applications/%{name}-root.desktop
+
+# create root desktop-file
+cp %{name}.desktop %{name}-root.desktop
+sed -i -e 's/Name=BleachBit$/Name=BleachBit as Administrator/g' %{name}-root.desktop
+sed -i -e 's/Exec=bleachbit$/Exec=bleachbit-root/g' %{name}-root.desktop
+
+cat > bleachbit.pam <<EOF
+#%PAM-1.0
+auth            include         config-util
+account         include         config-util
+session         include         config-util
+EOF
+
+cat > bleachbit.console <<EOF
+USER=root
+PROGRAM=/usr/bin/bleachbit
+SESSION=true
+EOF
+
+
+desktop-file-install \
+	--add-category="Utility"\
+        --dir=%{buildroot}%{_datadir}/applications/ \
+        --vendor="" %{name}.desktop
+
+desktop-file-install \
+	--add-category="Utility"\
+        --dir=%{buildroot}%{_datadir}/applications/ \
+        --vendor="" %{name}-root.desktop
+
+# consolehelper and userhelper
+ln -s consolehelper %{buildroot}/%{_bindir}/%{name}-root
+mkdir -p %{buildroot}/%{_sbindir}
+ln -s ../..%{_bindir}/%{name} %{buildroot}/%{_sbindir}/%{name}-root
+mkdir -p %{buildroot}%{_sysconfdir}/pam.d
+install -m 644 %{name}.pam %{buildroot}%{_sysconfdir}/pam.d/%{name}-root
+mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps
+install -m 644 %{name}.console %{buildroot}%{_sysconfdir}/security/console.apps/%{name}-root
+
+chmod 644 %{buildroot}%{_datadir}/%{name}/Worker.py
+chmod 755 %{buildroot}%{_datadir}/%{name}/CLI.py
+chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
+
+%__rm %{buildroot}%{_datadir}/%{name}/*.pyo
 
 %find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
-
-
 %files -f %{name}.lang
-%defattr(-,root,root)
-%doc COPYING README
+%doc COPYING
 %{_bindir}/%{name}
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/applications/%{name}-root.desktop
-%{_datadir}/%{name}/
-%{_datadir}/pixmaps/%{name}.png
+%{_bindir}/%{name}-root
+%{_sbindir}/*
+%{_sysconfdir}/pam.d/%{name}-root
+%{_sysconfdir}/security/console.apps/%{name}-root
+%{_datadir}/%{name}
+%{_datadir}/pixmaps/*.png
+%{_datadir}/applications/*.desktop
 
