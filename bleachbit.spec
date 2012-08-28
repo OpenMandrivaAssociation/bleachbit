@@ -1,11 +1,12 @@
 Name:		bleachbit
-Version:	0.9.2
-Release:	%mkrel 1
+Version:	0.9.3
+Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
 URL:		http://bleachbit.sourceforge.net/
-Source0:	%{name}-%{version}.tar.xz
+Source0:	%{name}-%{version}.tar.bz2
+Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	python-devel
 BuildRequires:	desktop-file-utils
@@ -20,7 +21,7 @@ BleachBit deletes unnecessary files to free valuable disk space
 and maintain privacy. Rid your system of old junk including cache,
 temporary files, and cookies. Designed for Linux systems, it
 wipes clean Bash, Beagle, Epiphany, Firefox, Adobe Flash, Java,
-KDE, OpenOffice.org, Opera, rpmbuild, XChat and more.
+KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
 
 %prep
 %setup -q
@@ -66,13 +67,16 @@ desktop-file-install \
         --vendor="" %{name}-root.desktop
 
 # consolehelper and userhelper
-ln -s consolehelper %{buildroot}/%{_bindir}/%{name}-root
-mkdir -p %{buildroot}/%{_sbindir}
-ln -s ../..%{_bindir}/%{name} %{buildroot}/%{_sbindir}/%{name}-root
+ln -s consolehelper %{buildroot}%{_bindir}/%{name}-root
+mkdir -p %{buildroot}%{_sbindir}
+ln -s ../..%{_bindir}/%{name} %{buildroot}%{_sbindir}/%{name}-root
 mkdir -p %{buildroot}%{_sysconfdir}/pam.d
 install -m 644 %{name}.pam %{buildroot}%{_sysconfdir}/pam.d/%{name}-root
 mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps
 install -m 644 %{name}.console %{buildroot}%{_sysconfdir}/security/console.apps/%{name}-root
+mkdir -p %{buildroot}%{_mandir}/man1
+install -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1
+install -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1/%{name}-root.1
 
 chmod 644 %{buildroot}%{_datadir}/%{name}/Worker.py
 chmod 755 %{buildroot}%{_datadir}/%{name}/CLI.py
@@ -86,13 +90,15 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 rm -rf %{buildroot}
 
 %files -f %{name}.lang
-%doc COPYING
+%doc COPYING README
 %{_bindir}/%{name}
 %{_bindir}/%{name}-root
 %{_sbindir}/*
-%{_sysconfdir}/pam.d/%{name}-root
-%{_sysconfdir}/security/console.apps/%{name}-root
+%config(noreplace) %{_sysconfdir}/pam.d/%{name}-root
+%config(noreplace) %{_sysconfdir}/security/console.apps/%{name}-root
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*.png
 %{_datadir}/applications/*.desktop
+%{_mandir}/man1/%{name}.1.xz
+%{_mandir}/man1/%{name}-root.1.xz
 
