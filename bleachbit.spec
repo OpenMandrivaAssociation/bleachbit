@@ -102,3 +102,29 @@ rm -rf %{buildroot}
 %{_mandir}/man1/%{name}.1.xz
 %{_mandir}/man1/%{name}-root.1.xz
 
+
+
+%changelog
+* Tue Aug 28 2012 Andrey Bondrov <abondrov@mandriva.org> 0.9.3-1
++ Revision: 815884
+- Push package update by Dago68 from MIB: New version 0.9.3, add manpage from Debian, add config(noreplace), add README
+
+* Fri Jun 01 2012 Andrey Bondrov <abondrov@mandriva.org> 0.9.2-1
++ Revision: 801767
+- imported package bleachbit
+
+  + Peťoš Šafařík <petos@mandriva.org>
+    - Fixed several problems is SPEC files (obsoleted scriplets, .desktop file etc.)
+    -This line, and following ones, will be ignored--
+      file SPECS/bleachbit.spec modified
+    - New version of BleachBit
+    - SPEC file cleaning
+    - import bleachbit
+
+
+* Fri Jun 01 2012 Andrey Bondrov <bondrov@math.dvgu.ru> 0.9.2-1mdv2010.2
+- Update to 0.9.2
+
+* Wed Nov 25 2009 Andrey Bondrov <bondrov@math.dvgu.ru> 0.7.1-69.1mib2009.1
+- First build for MIB users
+- Mandriva Italia Backports
