@@ -1,5 +1,5 @@
 Name:		bleachbit
-Version:	0.9.3
+Version:	1.0
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
@@ -11,8 +11,6 @@ BuildArch:	noarch
 BuildRequires:	python-devel
 BuildRequires:	desktop-file-utils
 Requires:	python
-Requires:	gnome-python
-Requires:	gnome-python-gnomevfs
 Requires:	pygtk2.0 >= 2.6
 Requires:	usermode-consoleonly
 
