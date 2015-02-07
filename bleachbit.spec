@@ -78,7 +78,7 @@ chmod 644 %{buildroot}%{_datadir}/%{name}/Worker.py
 chmod 755 %{buildroot}%{_datadir}/%{name}/CLI.py
 chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 
-rm %{buildroot}%{_datadir}/%{name}/*.pyo
+#rm %{buildroot}%{_datadir}/%{name}/*.pyo
 
 %find_lang %{name}
 
