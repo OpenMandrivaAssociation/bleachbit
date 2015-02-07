@@ -8,9 +8,9 @@ URL:		http://bleachbit.sourceforge.net/
 Source0:	%{name}-%{version}.tar.bz2
 Source1:	%{name}.1
 BuildArch:	noarch
-BuildRequires:	python-devel
+BuildRequires:	python2-devel
 BuildRequires:	desktop-file-utils
-Requires:	python
+Requires:	python2
 Requires:	pygtk2.0 >= 2.6
 Requires:	usermode-consoleonly
 
@@ -26,13 +26,11 @@ KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
 
 %build
 make -C po local
-python setup.py build
+python2 setup.py build
 
 sed -i -e 's|/usr/bin/env python|/usr/bin/python|g' bleachbit/GUI.py
 
 %install
-rm -rf %{buildroot}
-
 %makeinstall_std prefix=%{_prefix}
 
 # create root desktop-file
@@ -80,12 +78,10 @@ chmod 644 %{buildroot}%{_datadir}/%{name}/Worker.py
 chmod 755 %{buildroot}%{_datadir}/%{name}/CLI.py
 chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 
-%__rm %{buildroot}%{_datadir}/%{name}/*.pyo
+rm %{buildroot}%{_datadir}/%{name}/*.pyo
 
 %find_lang %{name}
 
-%clean
-rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %doc COPYING README
@@ -102,27 +98,3 @@ rm -rf %{buildroot}
 
 
 
-%changelog
-* Tue Aug 28 2012 Andrey Bondrov <abondrov@mandriva.org> 0.9.3-1
-+ Revision: 815884
-- Push package update by Dago68 from MIB: New version 0.9.3, add manpage from Debian, add config(noreplace), add README
-
-* Fri Jun 01 2012 Andrey Bondrov <abondrov@mandriva.org> 0.9.2-1
-+ Revision: 801767
-- imported package bleachbit
-
-  + Peťoš Šafařík <petos@mandriva.org>
-    - Fixed several problems is SPEC files (obsoleted scriplets, .desktop file etc.)
-    -This line, and following ones, will be ignored--
-      file SPECS/bleachbit.spec modified
-    - New version of BleachBit
-    - SPEC file cleaning
-    - import bleachbit
-
-
-* Fri Jun 01 2012 Andrey Bondrov <bondrov@math.dvgu.ru> 0.9.2-1mdv2010.2
-- Update to 0.9.2
-
-* Wed Nov 25 2009 Andrey Bondrov <bondrov@math.dvgu.ru> 0.7.1-69.1mib2009.1
-- First build for MIB users
-- Mandriva Italia Backports
