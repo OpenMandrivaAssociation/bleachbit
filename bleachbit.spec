@@ -1,11 +1,11 @@
 Name:		bleachbit
-Version:	1.0
-Release:	2
+Version:	1.17
+Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
 URL:		http://bleachbit.sourceforge.net/
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	python2-devel
@@ -28,7 +28,7 @@ KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
 make -C po local
 python2 setup.py build
 
-sed -i -e 's|/usr/bin/env python|/usr/bin/python|g' bleachbit/GUI.py
+sed -i -e 's|/usr/bin/env python|/usr/bin/python2|g' bleachbit/GUI.py bleachbit.py
 
 %install
 %makeinstall_std prefix=%{_prefix}
@@ -84,7 +84,7 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 
 
 %files -f %{name}.lang
-%doc COPYING README
+%doc COPYING README.md
 %{_bindir}/%{name}
 %{_bindir}/%{name}-root
 %{_sbindir}/*
@@ -95,6 +95,5 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 %{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1.xz
 %{_mandir}/man1/%{name}-root.1.xz
-
-
-
+%{_datadir}/appdata/bleachbit.appdata.xml
+%{_datadir}/polkit-1/actions/org.bleachbit.policy
