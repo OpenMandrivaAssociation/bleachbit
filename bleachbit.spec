@@ -8,7 +8,7 @@ URL:		http://bleachbit.sourceforge.net/
 Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
-BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(python)
 BuildRequires:	desktop-file-utils
 Requires:	python2
 Requires:	pygtk2.0 >= 2.6
