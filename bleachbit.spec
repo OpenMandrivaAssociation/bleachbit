@@ -1,5 +1,5 @@
 Name:		bleachbit
-Version:	2.0
+Version:	2.1
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
@@ -9,6 +9,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python2)
+BuildRequires:	pythonegg(setuptools)
 BuildRequires:	desktop-file-utils
 Requires:	python2
 Requires:	pygtk2.0 >= 2.6
@@ -28,10 +29,10 @@ KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
 make -C po local
 python2 setup.py build
 
-sed -i -e 's|/usr/bin/env python|/usr/bin/python2|g' bleachbit/GUI.py bleachbit.py
+#sed -i -e 's|/usr/bin/env python|/usr/bin/python2|g' bleachbit/GUI.py bleachbit.py
 
 %install
-%makeinstall_std prefix=%{_prefix}
+%make_install prefix=%{_prefix}
 
 # create root desktop-file
 cp %{name}.desktop %{name}-root.desktop
