@@ -29,10 +29,10 @@ KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
 make -C po local
 python2 setup.py build
 
-sed -i -e 's|/usr/bin/env python|/usr/bin/python2|g' bleachbit/GUI.py bleachbit.py
+#sed -i -e 's|/usr/bin/env python|/usr/bin/python2|g' bleachbit/GUI.py bleachbit.py
 
 %install
-%makeinstall_std prefix=%{_prefix}
+%make_install prefix=%{_prefix}
 
 # create root desktop-file
 cp %{name}.desktop %{name}-root.desktop
