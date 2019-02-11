@@ -9,6 +9,7 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python2)
+BuildRequires:	pythonegg(setuptools)
 BuildRequires:	desktop-file-utils
 Requires:	python2
 Requires:	pygtk2.0 >= 2.6
