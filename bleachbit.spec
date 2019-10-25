@@ -1,5 +1,5 @@
 Name:		bleachbit
-Version:	2.2
+Version:	3.0
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
@@ -9,10 +9,11 @@ Source0:	%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pythonegg(setuptools)
 BuildRequires:	desktop-file-utils
 Requires:	python2
-Requires:	pygtk2.0 >= 2.6
+Requires:	gtk+3
 Requires:	usermode-consoleonly
 
 %description
