@@ -95,7 +95,7 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*.png
 %{_datadir}/applications/*.desktop
-%{_mandir}/man1/%{name}.1.xz
-%{_mandir}/man1/%{name}-root.1.xz
-%{_datadir}/appdata/bleachbit.appdata.xml
+%{_mandir}/man1/%{name}.1.*
+%{_mandir}/man1/%{name}-root.1.*
+%{_datadir}/metainfo/org.bleachbit.BleachBit.metainfo.xml
 %{_datadir}/polkit-1/actions/org.bleachbit.policy
