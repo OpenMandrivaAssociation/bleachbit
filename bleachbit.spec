@@ -36,7 +36,7 @@ python2 setup.py build
 %make_install prefix=%{_prefix}
 
 # create root desktop-file
-cp %{name}.desktop %{name}-root.desktop
+cp org.bleachbit.BleachBit.desktop %{name}-root.desktop
 sed -i -e 's/Name=BleachBit$/Name=BleachBit as Administrator/g' %{name}-root.desktop
 sed -i -e 's/Exec=bleachbit$/Exec=bleachbit-root/g' %{name}-root.desktop
 
@@ -57,7 +57,7 @@ EOF
 desktop-file-install \
 	--add-category="Utility"\
         --dir=%{buildroot}%{_datadir}/applications/ \
-        --vendor="" %{name}.desktop
+        --vendor="" org.bleachbit.BleachBit.desktop
 
 desktop-file-install \
 	--add-category="Utility"\
