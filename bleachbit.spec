@@ -1,18 +1,20 @@
 Name:		bleachbit
-Version:	3.2.0
+Version:	4.0.0
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
 URL:		http://bleachbit.sourceforge.net/
-Source0:	%{name}-%{version}.tar.gz
+Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
-BuildRequires:	pkgconfig(python2)
+BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gtk+-3.0)
-BuildRequires:	pythonegg(setuptools)
+BuildRequires:	python3dist(setuptools)
 BuildRequires:	desktop-file-utils
-Requires:	python2
+Requires:	python
+Requires:	python3dist(scandir)
+Requires:	python3dist(pygobject)
 Requires:	gtk+3
 Requires:	usermode-consoleonly
 
@@ -28,7 +30,7 @@ KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
 
 %build
 make -C po local
-python2 setup.py build
+%py_build
 
 #sed -i -e 's|/usr/bin/env python|/usr/bin/python2|g' bleachbit/GUI.py bleachbit.py
 
