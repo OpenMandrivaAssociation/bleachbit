@@ -1,5 +1,5 @@
 Name:		bleachbit
-Version:	4.0.0
+Version:	4.2.0
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
