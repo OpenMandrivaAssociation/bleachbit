@@ -1,6 +1,6 @@
 Name:		bleachbit
 Version:	4.4.2
-Release:	2
+Release:	3
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
@@ -16,7 +16,6 @@ Requires:	python
 Requires:	python3dist(scandir)
 Requires:	python3dist(pygobject)
 Requires:	gtk+3
-Requires:	usermode-consoleonly
 
 %description
 BleachBit deletes unnecessary files to free valuable disk space
@@ -40,21 +39,7 @@ make -C po local
 # create root desktop-file
 cp org.bleachbit.BleachBit.desktop %{name}-root.desktop
 sed -i -e 's/Name=BleachBit$/Name=BleachBit as Administrator/g' %{name}-root.desktop
-sed -i -e 's/Exec=bleachbit$/Exec=bleachbit-root/g' %{name}-root.desktop
-
-cat > bleachbit.pam <<EOF
-#%PAM-1.0
-auth            include         config-util
-account         include         config-util
-session         include         config-util
-EOF
-
-cat > bleachbit.console <<EOF
-USER=root
-PROGRAM=/usr/bin/bleachbit
-SESSION=true
-EOF
-
+sed -i -e 's/Exec=bleachbit$/Exec=pkexec bleachbit/g' %{name}-root.desktop
 
 desktop-file-install \
 	--add-category="Utility"\
@@ -66,17 +51,8 @@ desktop-file-install \
         --dir=%{buildroot}%{_datadir}/applications/ \
         --vendor="" %{name}-root.desktop
 
-# consolehelper and userhelper
-ln -s consolehelper %{buildroot}%{_bindir}/%{name}-root
-mkdir -p %{buildroot}%{_sbindir}
-ln -s ../..%{_bindir}/%{name} %{buildroot}%{_sbindir}/%{name}-root
-mkdir -p %{buildroot}%{_sysconfdir}/pam.d
-install -m 644 %{name}.pam %{buildroot}%{_sysconfdir}/pam.d/%{name}-root
-mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps
-install -m 644 %{name}.console %{buildroot}%{_sysconfdir}/security/console.apps/%{name}-root
 mkdir -p %{buildroot}%{_mandir}/man1
 install -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1
-install -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1/%{name}-root.1
 
 chmod 644 %{buildroot}%{_datadir}/%{name}/Worker.py
 chmod 755 %{buildroot}%{_datadir}/%{name}/CLI.py
@@ -86,18 +62,12 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 
 %find_lang %{name}
 
-
 %files -f %{name}.lang
 %doc COPYING README.md
 %{_bindir}/%{name}
-%{_bindir}/%{name}-root
-%{_sbindir}/*
-%config(noreplace) %{_sysconfdir}/pam.d/%{name}-root
-%config(noreplace) %{_sysconfdir}/security/console.apps/%{name}-root
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*.png
 %{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1.*
-%{_mandir}/man1/%{name}-root.1.*
 %{_datadir}/metainfo/org.bleachbit.BleachBit.metainfo.xml
 %{_datadir}/polkit-1/actions/org.bleachbit.policy
