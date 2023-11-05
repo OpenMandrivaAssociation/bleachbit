@@ -1,6 +1,6 @@
 Name:		bleachbit
-Version:	4.4.2
-Release:	3
+Version:	4.6.0
+Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
