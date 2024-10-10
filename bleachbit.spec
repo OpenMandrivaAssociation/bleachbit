@@ -1,17 +1,18 @@
 Name:		bleachbit
-Version:	4.6.0
+Version:	4.6.2
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
 URL:		http://bleachbit.sourceforge.net/
-Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.gz
+Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.lzma
 Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	python3dist(setuptools)
 BuildRequires:	desktop-file-utils
+BuildRequires:	gettext
 Requires:	python
 Requires:	python3dist(scandir)
 Requires:	python3dist(pygobject)
