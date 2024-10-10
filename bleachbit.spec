@@ -12,6 +12,7 @@ BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	python3dist(setuptools)
 BuildRequires:	desktop-file-utils
+BuildRequires:	gettext
 Requires:	python
 Requires:	python3dist(scandir)
 Requires:	python3dist(pygobject)
