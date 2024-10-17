@@ -4,7 +4,7 @@ Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
-URL:		http://bleachbit.sourceforge.net/
+URL:		https://bleachbit.sourceforge.net/
 Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.lzma
 Source1:	%{name}.1
 BuildArch:	noarch
