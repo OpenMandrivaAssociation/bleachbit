@@ -68,6 +68,7 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*.png
+%{_datadir}/pixmaps/bleachbit-indicator.svg
 %{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1.*
 %{_datadir}/metainfo/org.bleachbit.BleachBit.metainfo.xml
