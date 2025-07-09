@@ -1,5 +1,5 @@
 Name:		bleachbit
-Version:	4.6.2
+Version:	5.0.0
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
@@ -68,6 +68,7 @@ chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*.png
+%{_datadir}/pixmaps/bleachbit-indicator.svg
 %{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1.*
 %{_datadir}/metainfo/org.bleachbit.BleachBit.metainfo.xml
