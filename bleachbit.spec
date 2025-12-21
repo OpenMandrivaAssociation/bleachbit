@@ -8,6 +8,7 @@ URL:		https://bleachbit.sourceforge.net/
 Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.lzma
 Source1:	%{name}.1
 BuildArch:	noarch
+BuildRequires:	make
 BuildRequires:	pkgconfig(python)
 BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	python3dist(setuptools)
