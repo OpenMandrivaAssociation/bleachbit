@@ -23,8 +23,8 @@ Requires:	gtk+3
 BleachBit deletes unnecessary files to free valuable disk space
 and maintain privacy. Rid your system of old junk including cache,
 temporary files, and cookies. Designed for Linux systems, it
-wipes clean Bash, Chromium, DNF, Google Chrome, Epiphany, Firefox,
-KDE, LibreOffice, Opera, rpm-build, XChat, and more.
+wipes clean Bash, DNF, KDE, LibreOffice, rpm-build, XChat,
+Chromium-based web browsers, and Firefox-based web browsers, and more.
 
 %prep
 %setup -q
