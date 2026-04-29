@@ -4,7 +4,7 @@ Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
-URL:		https://bleachbit.sourceforge.net/
+URL:		https://www.bleachbit.org
 Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.lzma
 Source1:	%{name}.1
 BuildArch:	noarch
@@ -23,8 +23,8 @@ Requires:	gtk+3
 BleachBit deletes unnecessary files to free valuable disk space
 and maintain privacy. Rid your system of old junk including cache,
 temporary files, and cookies. Designed for Linux systems, it
-wipes clean Bash, Beagle, Epiphany, Firefox, Adobe Flash, Java,
-KDE, OpenOffice.org, Opera, rpm-build, XChat and more.
+wipes clean Bash, DNF, KDE, LibreOffice, rpm-build, XChat,
+Chromium-based web browsers, and Firefox-based web browsers, and more.
 
 %prep
 %setup -q
@@ -56,9 +56,7 @@ desktop-file-install \
 mkdir -p %{buildroot}%{_mandir}/man1
 install -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1
 
-chmod 644 %{buildroot}%{_datadir}/%{name}/Worker.py
-chmod 755 %{buildroot}%{_datadir}/%{name}/CLI.py
-chmod 755 %{buildroot}%{_datadir}/%{name}/GUI.py
+chmod 644 %{buildroot}%{_datadir}/%{name}/{CLI,GUI,Worker}.py
 
 #rm %{buildroot}%{_datadir}/%{name}/*.pyo
 
