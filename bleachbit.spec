@@ -1,11 +1,11 @@
 Name:		bleachbit
-Version:	6.0.4
-Release:	2
+Version:	6.0.5
+Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
 License:	GPLv3
-URL:		https://www.bleachbit.org
-Source0:	https://download.bleachbit.org/%{name}-%{version}.tar.lzma
+URL:		https://bleachbit.sourceforge.net/
+Source0:	https://github.com/bleachbit/bleachbit/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Source1:	%{name}.1
 BuildArch:	noarch
 BuildRequires:	make
