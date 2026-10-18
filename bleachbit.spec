@@ -1,5 +1,5 @@
 Name:		bleachbit
-Version:	6.0.5
+Version:	6.0.6
 Release:	1
 Summary:	A tool to remove unnecessary files, free disk space and maintain privacy
 Group:		System/Configuration/Other
@@ -69,6 +69,7 @@ sed -i '1s|^#!.*|#!/usr/bin/python|' %{buildroot}%{_bindir}/%{name}
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*.png
+%{_datadir}/icons/hicolor/scalable/apps/bleachbit.svg
 #{_datadir}/pixmaps/bleachbit-indicator.svg
 %{_datadir}/applications/*.desktop
 %{_mandir}/man1/%{name}.1.*
